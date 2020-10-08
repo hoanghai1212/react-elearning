@@ -1,6 +1,9 @@
-@mixin size($width, $height: $width) {
+@mixin size($width, $height: $width, $min: null) {
   width: $width;
   height: $height;
+  @if $min == 'min' {
+    min-width: $width;
+  }
 }
 
 @mixin flexbox(
@@ -102,52 +105,51 @@
   }
 }
 
-@mixin screen($size, $pixels: brk('sm')) {
-  @if $size == 'sm' {
-    @media screen and (min-width: brk('sm')) {
+@mixin screen($name) {
+  @if map-has-key($map: $breakpoints, $key: $name) {
+    @media #{inspect(map-get($breakpoints, $name))} {
       @content;
     }
-  } @else if $size == 'md' {
-    @media screen and (min-width: brk('md')) {
-      @content;
-    }
-  } @else if $size == 'lg' {
-    @media screen and (min-width: brk('lg')) {
-      @content;
-    }
-  } @else if $size == 'x-lg' {
-    @media screen and (min-width: brk('x-lg')) {
-      @content;
-    }
-  } @else if $size == 'custom' {
-    @media screen and (min-width: $pixels + px) {
-      @content;
-    }
-  }
-}
-
-@mixin headerLink-hover() {
-  color: $txt-white;
-  font-size: 16px;
-
-  &:hover,
-  &:active,
-  &:visited {
-    color: $txt-headerLink-hover;
-  }
-
-  @include screen(lg) {
-    color: $txt-headerLink;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 12px;
+  } @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+    + "Please make sure it is defined in `$breakpoints` map.";
   }
 }
 
 @mixin button-hover($defaultColor, $hoverColor: $defaultColor) {
   background-color: $defaultColor;
 
-  &:hover {
+  &:hover,
+  &:focus,
+  &:visited {
     background-color: $hoverColor;
+  }
+}
+
+@mixin font-size($fs-map, $letter-spacing-percent: 0) {
+  @each $fs-breakpoint, $fs-font-size in $fs-map {
+    $letter-spacing: $fs-font-size * ($letter-spacing-percent / 100);
+
+    @if $fs-breakpoint == base {
+      font-size: $fs-font-size;
+      letter-spacing: $letter-spacing;
+    } @else {
+      @include screen($fs-breakpoint) {
+        font-size: $fs-font-size;
+        letter-spacing: $letter-spacing;
+      }
+    }
+  }
+}
+
+@mixin background-color($bg-map) {
+  @each $bg-breakpoint, $bg-background-color in $bg-map {
+    @if $bg-breakpoint == base {
+      background-color: $bg-background-color;
+    } @else {
+      @include screen($bg-breakpoint) {
+        background-color: $bg-background-color;
+      }
+    }
   }
 }

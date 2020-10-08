@@ -1,0 +1,114 @@
+@import 'src/scss/main';
+
+.Course {
+  @include size(18rem, fit-content);
+  border: 0.1rem solid $bg-courseBorder;
+  border-radius: 0.8rem;
+
+  box-shadow: 0 0.225rem 0.225rem -0.15rem rgba($bg-courseShadow, $alpha: 0.09),
+    0 0.225rem 0.3rem 0 rgba($bg-courseShadow, $alpha: 0.04),
+    0 0.075rem 0.6rem 0 rgba($bg-courseShadow, $alpha: 0.02);
+
+  @include screen(lg) {
+    width: 21rem;
+  }
+
+  &__Image {
+    img {
+      @include size(100%, 10rem);
+      border-top-left-radius: 0.7rem;
+      border-top-right-radius: 0.7rem;
+    }
+  }
+
+  &__Info {
+    @include flexbox(flex-start, space-between);
+    padding: 0 0.8rem 0.8rem;
+  }
+
+  &__Left {
+    padding-top: 0.4rem;
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  &__Title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    max-width: 13.5rem;
+    min-height: 4rem;
+
+    @include font-size($fs-courseTitle);
+    color: $txt-courseTitle;
+    font-weight: 700;
+  }
+
+  &__Author {
+    @include font-size($fs-courseAuthor);
+    color: $txt-courseAuthor;
+    font-weight: 500;
+  }
+
+  &__Rating {
+    @include flexbox(center);
+    height: 1.5rem;
+
+    & > :global(.ant-rate) {
+      color: $bg-courseRate;
+
+      span {
+        @include font-size($fs-courseRateIcon);
+      }
+
+      path {
+        stroke: $bg-courseRate;
+        stroke-width: 5rem;
+      }
+
+      :global(.ant-rate-star) {
+        margin-right: 0.4rem;
+      }
+    }
+  }
+
+  &__Favorite {
+    & > :global(.ant-rate) {
+      color: $bg-courseRate;
+
+      span {
+        @include font-size($fs-courseFavoriteIcon);
+      }
+
+      path {
+        stroke: $bg-courseFavoriteStroke;
+        stroke-width: 5rem;
+      }
+
+      :global(.ant-rate-star-full) path {
+        stroke: $bg-courseRate;
+      }
+    }
+  }
+
+  &__Footer {
+    @include flexbox(center, space-between);
+    border-top: 0.1rem solid $bg-courseBorder;
+    padding: 0.8rem;
+
+    & > p {
+      @include flexbox(flex-start);
+      @include font-size($fs-courseFooter);
+      color: $txt-courseFooter;
+      margin-bottom: 0;
+
+      & > span {
+        @include font-size($fs-courseFooterIcon);
+        margin-right: 0.4rem;
+      }
+    }
+  }
+}

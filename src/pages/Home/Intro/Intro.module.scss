@@ -1,0 +1,31 @@
+@import 'src/scss/main';
+
+.Intro {
+  @include flexbox(center, null, column);
+  @include background-color($bg-intro);
+  padding: 2rem 2rem 1rem;
+
+  &__Title {
+    margin-bottom: 0.8rem;
+
+    color: $txt-introTitle;
+    font-weight: 700;
+    @include font-size($fs-introTitle);
+  }
+
+  @include screen(md) {
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 1.2rem 2rem;
+    border-bottom: 0.2rem solid $bg-introBorder;
+  }
+
+  @include screen(lg) {
+    padding: 1.6rem 5%;
+  }
+
+  @include screen(xl) {
+    padding: 1.6rem 10%;
+  }
+}

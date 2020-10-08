@@ -1,0 +1,132 @@
+@import 'src/scss/main';
+.Footer {
+  background-color: $bg-footer;
+  padding: 2rem;
+
+  &__Top {
+    order: 3;
+  }
+
+  &__Language {
+    @include relative();
+    @include flexbox(center);
+    @include size(17rem, 3rem);
+    @include font-size($fs-footerLanguage);
+    @include screen(lg) {
+      @include size(20rem, 3.2rem);
+    }
+
+    background-color: $bg-footerLanguage;
+    border-radius: 0.4rem;
+    padding: 0 0.8rem;
+
+    color: $txt-placeholder;
+
+    &Select:global(.ant-select) {
+      @include absolute(left 0);
+      @include font-size($fs-footerLanguage);
+
+      color: $txt-placeholder;
+
+      &:global(.ant-select-single:not(.ant-select-customize-input))
+        :global(.ant-select-selector) {
+        @include flexbox(center);
+        @include size(17rem, 3rem);
+        @include screen(lg) {
+          @include size(20rem, 3.2rem);
+        }
+
+        border: none;
+        padding: 0;
+        padding-left: 3rem;
+      }
+    }
+
+    &Dropdown:global(.ant-select-dropdown) {
+      padding: 0;
+      border-radius: 0.4rem;
+      border: 0.1rem solid $bg-footerDropdownSelected;
+
+      :global(.ant-select-item-option-selected:not(.ant-select-item-option-disabled)) {
+        background-color: $bg-footerDropdownSelected;
+
+        :global(.ant-select-item-option-content) {
+          color: $txt-footerLanguageDropdown-selected;
+        }
+      }
+    }
+
+    &Dropdown :global(.ant-select-item-option-content) {
+      @include font-size($fs-footerLanguage);
+      color: $txt-footerLanguageDropdown;
+    }
+  }
+
+  &__Middle {
+    @include screen(sm) {
+      order: 1;
+      margin-top: 0;
+    }
+
+    margin-top: 2rem;
+    margin-bottom: 1.7rem;
+  }
+
+  &__Title {
+    margin-bottom: 1rem;
+
+    @include font-size($fs-footerTitle, 3);
+    font-weight: 700;
+    color: $txt-footerTitle;
+  }
+
+  &__List {
+    @include flexbox(null, null, column);
+    @include font-size($fs-footerLink, 9);
+
+    a {
+      margin-bottom: 0.8rem;
+
+      &:hover {
+        color: $txt-white;
+      }
+    }
+  }
+
+  &__Form {
+    @include screen(md) {
+      @include flexbox(null, null, null, null, 2);
+    }
+  }
+
+  &__Bottom {
+    div {
+      margin-bottom: 1.5rem;
+    }
+    span {
+      @include font-size($fs-footerCopyright);
+      color: $txt-footerForm;
+    }
+
+    @include screen(sm) {
+      @include flexbox(center, space-between, null, null, 3);
+      flex-basis: 100%;
+
+      div {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @include screen(sm) {
+    @include flexbox(flex-start, space-between, row, wrap);
+  }
+
+  @include screen(lg) {
+    padding: 3rem 5% 2rem;
+  }
+
+  @include screen(xl) {
+    padding: 6rem 10% 3rem;
+  }
+}
